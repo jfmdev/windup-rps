@@ -1,72 +1,17 @@
-# Vite Phaser Typescript Template
+# Windup RPS
 
-Vite + Phaser + Typescript starter template.
-
-## Preview
-
-![preview.jpg](preview.jpg)
+A game where you must play rock-paper-scissors against a group of evil (but no so smart) windup robots.
 
 ## Getting Started
 
-```bash
-npx degit iwantantra/vite-phaser-ts my-game
-cd my-game
-npm install
-```
+The project was created using the [vite-phaser-ts](https://github.com/iwantantra/vite-phaser-ts) template, which provides the following scripts:
 
-## Available scripts
-
-### To run the project
-
-```bash
-npm run dev
-```
-
-### To build the project
-
-```bash
-npm run build
-```
-
-### To preview the build
-
-```bash
-npm run preview
-```
-
-### To lint check your code using eslint
-
-```bash
-npm run lint
-```
-
-### To lint check and fix your code
-
-```bash
-npm run lint-fix
-```
-
-## Project structure
-
-```
-.
-├── dist
-├── node_modules
-├── public
-│    ├── assets
-├── src
-│   ├── scenes
-│       ├── HelloScene.ts
-│   ├── main.ts
-├── index.html
-├── package.json
-```
-
-`dist` your build will placed in this folder.\
-`src` you can structure your codes and folder as you like inside this folder.\
-`public` your static asset must be placed inside this folder. You can also
-create new folder inside this folder.
+* `npm run dev` to run the project locally.
+* `npm run build` to build the project.
+* `npm run preview` to preview the build.
+* `npm run lint` to lint check your code using eslint.
+* `npm run lint-fix` to lint check and fix your code.
 
 ## License
 
-[MIT License](LICENSE.md)
+Windup RPS is free software; you can redistribute it and/or modify it under the terms of the Mozilla Public License v2.0. You should have received a copy of the MPL 2.0 along with this software, otherwise you can obtain one at http://mozilla.org/MPL/2.0/.
