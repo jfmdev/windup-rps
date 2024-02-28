@@ -1,7 +1,12 @@
 import Phaser from "phaser";
+
+import GameScene from "./scenes/GameScene";
+import HelpScene from "./scenes/HelpScene";
 import IntroScene from "./scenes/IntroScene";
+import LevelsScene from "./scenes/LevelsScene";
 import MenuScene from "./scenes/MenuScene";
 import PreloadScene from "./scenes/PreloadScene";
+
 import { GAME_HEIGHT, GAME_WIDTH } from "./util/misc";
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -22,7 +27,10 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     PreloadScene,
     IntroScene,
-    MenuScene
+    MenuScene,
+    HelpScene,
+    LevelsScene,
+    GameScene
   ]
 };
 
