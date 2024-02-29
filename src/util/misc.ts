@@ -1,37 +1,4 @@
-
-// // Declare namespace.
-// export const Shared = {
-//   resolution: {
-//     height: 0,
-//     width: 0
-//   },
-//   scale: 1,
-//   world: {
-//     centerX: 0,
-//     centerY: 0,
-//     height: 0,
-//     width: 0
-//   },
-// };
-
-// const GAME_WIDTH = 640;
-// const GAME_HEIGHT = 480;
-
-// // Define resolution and scales (so it fits the screen when resolution is small).
-// if(window.innerWidth < GAME_WIDTH || window.innerHeight < GAME_HEIGHT) {
-//   const scaleX = window.innerWidth / GAME_WIDTH;
-//   const scaleY = window.innerHeight / GAME_HEIGHT;
-//   Shared.scale = scaleX < scaleY? scaleX : scaleY;   
-// }
-
-// Shared.resolution.width = Math.floor(Shared.scale * GAME_WIDTH);
-// Shared.resolution.height = Math.floor(Shared.scale * GAME_HEIGHT);
-
-// // Define virtual width and height.
-// Shared.world.width = 640;
-// Shared.world.height = 480;
-// Shared.world.centerX = Shared.world.width / 2;
-// Shared.world.centerY = Shared.world.height / 2;
+// --- Constants and Enumerations --- //
 
 export const GAME_WIDTH = 640;
 export const GAME_HEIGHT = 480;
@@ -43,7 +10,7 @@ export const Styles = {
   boldLabel: { font: '22px Arial', fontWeight: 'bold', fill: '#ffffff', stroke: "#000000", strokeThickness: 2, boundsAlignH: "center", boundsAlignV: "middle" },
   
   menuLabel: { font: '46px Arial', fontWeight: 'bold', fill: "#ffffff", stroke: "#000000", strokeThickness: 6, boundsAlignH: "center", boundsAlignV: "middle"},
-  helpText: { font: '20px Arial', fill: '#ffffff', boundsAlignH: "center", boundsAlignV: "top", wordWrap: true, wordWrapWidth: 620 },
+  helpText: { font: '20px Arial', fill: '#ffffff', boundsAlignH: "center", boundsAlignV: "top", wordWrap: { width: (GAME_WIDTH - 20), useAdvancedWrap: true } },
   historyTitle: { font: '18px Verdana', fill: '#ffffff', stroke: "#000000", strokeThickness: 2, boundsAlignH: "center", boundsAlignV: "middle" },
   historyText: { font: '14px Verdana', fill: '#ffffff', stroke: "#000000", strokeThickness: 2, boundsAlignH: "center", boundsAlignV: "middle" },
   levelLabel: { font: '18px Verdana', fill: '#ffffff', stroke: "#000000", strokeThickness: 2, boundsAlignH: "left", boundsAlignV: "middle" },
@@ -54,6 +21,8 @@ export enum Throw {
   PAPER = 'Paper',
   SCISSORS = 'Scissors'
 }
+
+// --- Functions --- //
 
 // Method for calculate the result of a round.
 export function matchResult(playerThrow: Throw, robotThrow: Throw) {
@@ -92,13 +61,12 @@ export function getScore(matchHistory: Array<any>) {
 }
 
 // Define event handlers for change the cursor with the over events.
-// TODO: Shouldn't use 'any'.
 export const changeCursor = {
-  onInputOver: function(game: any) { 
-    game.canvas.style.cursor = "pointer";
+  onInputOver: function(scene: Phaser.Scene) { 
+    scene.game.canvas.style.cursor = "pointer";
   },
-  onInputOut: function(game: any) { 
-    game.canvas.style.cursor = "default"; 
+  onInputOut: function(scene: Phaser.Scene) { 
+    scene.game.canvas.style.cursor = "default"; 
   }
 };
 
