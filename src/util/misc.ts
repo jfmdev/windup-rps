@@ -17,9 +17,9 @@ export const Styles = {
 };
 
 export enum Throw {
-  ROCK = 'Rock',
-  PAPER = 'Paper',
-  SCISSORS = 'Scissors'
+  ROCK = 0,
+  PAPER = 1,
+  SCISSORS = 2
 }
 
 // --- Functions --- //
@@ -37,12 +37,13 @@ export function matchResult(playerThrow: Throw, robotThrow: Throw) {
   return null;
 }
 
-// TODO: Remove (this function isn't need if using the 'Throw' enum).
-// export function throwToString(number: number) {
-//   if(number == 0) return Throw.ROCK.toString();
-//   if(number == 1) return Throw.PAPER.toString();
-//   return Throw.SCISSORS.toString();
-// }
+export function throwToString(value: Throw) {
+  return value == Throw.ROCK 
+    ? 'Rock'
+    : value == Throw.PAPER
+    ? 'Paper'
+    : 'Scissors';
+}
 
 // Method for calculate the current score of a match.
 // TODO: Shouldn't use 'any'.
