@@ -1,5 +1,5 @@
 import { Styles } from '../util/misc.js';
-import { BackButton } from '../util/text_button';
+import { TextButton } from '../util/buttons.js';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -25,6 +25,6 @@ export default class MainScene extends Phaser.Scene {
     this.add.text(10, 50, instructions, Styles.helpText);
     
     // Add back button.
-    BackButton(this, "Go back");
+    TextButton.backButton(this, "Go back");
   }
 }

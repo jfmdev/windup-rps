@@ -37,12 +37,12 @@ export function matchResult(playerThrow: Throw, robotThrow: Throw) {
   return null;
 }
 
-// TODO: This function isn't need if using the 'Throw' enum.
-export function throwToString(number: number) {
-  if(number == 0) return Throw.ROCK.toString();
-  if(number == 1) return Throw.PAPER.toString();
-  return Throw.SCISSORS.toString();
-}
+// TODO: Remove (this function isn't need if using the 'Throw' enum).
+// export function throwToString(number: number) {
+//   if(number == 0) return Throw.ROCK.toString();
+//   if(number == 1) return Throw.PAPER.toString();
+//   return Throw.SCISSORS.toString();
+// }
 
 // Method for calculate the current score of a match.
 // TODO: Shouldn't use 'any'.

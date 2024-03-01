@@ -1,6 +1,5 @@
+import { LevelButton, TextButton } from '../util/buttons.js';
 import { getMaxLevel, Styles } from '../util/misc.js';
-import { BackButton } from '../util/text_button';
-import { LevelButton } from '../util/level_button';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -29,7 +28,7 @@ export default class MainScene extends Phaser.Scene {
     }
 
     // Add back button.
-    BackButton(this, "Go back");
+    TextButton.backButton(this, "Go back");
   }
 
   playLevel(level: number) {
