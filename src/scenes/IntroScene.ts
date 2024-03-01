@@ -9,7 +9,7 @@ export default class IntroScene extends Phaser.Scene {
   }
 
   preload() {
-    // Do nothing, all assets are loaded by main scene.
+    // Do nothing, all assets are loaded by preload scene.
   }
 
   create() {

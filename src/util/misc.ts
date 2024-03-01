@@ -16,10 +16,22 @@ export const Styles = {
   levelLabel: { font: '18px Verdana', fill: '#ffffff', stroke: "#000000", strokeThickness: 2, boundsAlignH: "left", boundsAlignV: "middle" },
 };
 
+export enum Result {
+  DRAW = 0,
+  PLAYER_WON = 1,
+  ROBOT_WON = 2
+}
+
 export enum Throw {
   ROCK = 0,
   PAPER = 1,
   SCISSORS = 2
+}
+
+export interface Round {
+  player: Throw;
+  robot: Throw;
+  result: Result;
 }
 
 // --- Functions --- //
@@ -30,11 +42,12 @@ export function matchResult(playerThrow: Throw, robotThrow: Throw) {
     // Verify if player wins (true) or if robot wins (false).
     return (playerThrow === Throw.ROCK && robotThrow === Throw.SCISSORS) ||
            (playerThrow === Throw.PAPER && robotThrow === Throw.ROCK) ||
-           (playerThrow === Throw.SCISSORS && robotThrow === Throw.PAPER);
+           (playerThrow === Throw.SCISSORS && robotThrow === Throw.PAPER)
+      ? Result.PLAYER_WON
+      : Result.ROBOT_WON
     }
 
-  // Draw.
-  return null;
+  return Result.DRAW;
 }
 
 export function throwToString(value: Throw) {
@@ -46,13 +59,12 @@ export function throwToString(value: Throw) {
 }
 
 // Method for calculate the current score of a match.
-// TODO: Shouldn't use 'any'.
-export function getScore(matchHistory: Array<any>) {
+export function getScore(matchHistory: Array<Round>) {
   let score = 0;
   for(let i=matchHistory.length-1; i>=0; i--) {
-    if(matchHistory[i].result === true && score >= 0) {
+    if(matchHistory[i].result === Result.PLAYER_WON && score >= 0) {
       score++;
-    } else if(matchHistory[i].result === false && score <= 0) {
+    } else if(matchHistory[i].result === Result.ROBOT_WON && score <= 0) {
       score--;
     } else {
       i = -1;
@@ -97,8 +109,8 @@ export function updateMaxLevel(newMax: number) {
 }
 
 // Permut the elements of an array.
-export function permut<Type>(array: Type[], number: number, pos: number|null) {
-    if(!pos) {
+export function permut<Type>(array: Type[], number: number, pos: number|null = null) {
+    if(pos === null) {
       pos = 0;
     }
     

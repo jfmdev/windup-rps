@@ -5,7 +5,7 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    // Do nothing, resources will be loaded on 'create'.
+    // Do nothing, assets will be loaded on 'create()'.
   }
 
   create() {
