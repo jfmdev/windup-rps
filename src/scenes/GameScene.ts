@@ -1,4 +1,5 @@
 import { TextButton } from '../util/buttons.js';
+import { ChoosePanel } from '../util/choose_panel.js';
 import { GameAI, RandomThrow, ThrowAlgorithm } from '../util/game_ai.js';
 import { getScore, matchResult, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
 import { Mannequin, Robot } from '../util/figures.js';
@@ -14,6 +15,8 @@ export default class MainScene extends Phaser.Scene {
   private scoreToWin: number = 5;
   private history: Array<Round> = [];
   private gameAI: ThrowAlgorithm = new RandomThrow();
+
+  private choosePanel: ChoosePanel | null = null;
 
   constructor() {
     super('GameScene');
@@ -46,7 +49,7 @@ export default class MainScene extends Phaser.Scene {
     this.mannequin = new Mannequin(this);
 
     // Add choose, result and history panels.
-    // this.choosePanel = new ChoosePanel(game, {'x': Shared.world.centerX, 'y': Shared.world.centerY + 100}, this.onPlayerChoosed.bind(this));
+    this.choosePanel = new ChoosePanel(this, this.game.canvas.width/2, this.game.canvas.height/2+ 100, this.onPlayerChoosed.bind(this));
     // this.resultPanel = new ResultPanel(game, {'x': Shared.world.centerX, 'y': 10});
     // this.historyPanel = new HistoryPanel(game, {'x': Shared.world.width - 100, 'y': 20});
 
@@ -62,8 +65,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   onPlayerChoosed(playerThrow: Throw) {
-    // // Disable choosing panel.
-    // this.choosePanel.disable();
+    // Disable choosing panel.
+    this.choosePanel?.disable();
 
     // User IA for select robot hand.
     const robotThrow = this.gameAI.next();
@@ -95,7 +98,7 @@ export default class MainScene extends Phaser.Scene {
     // this.resultPanel.hide();
 
     // Verify if the match as ended.
-    let score = getScore(this.history);
+    const score = getScore(this.history);
     if(score >= this.scoreToWin || score <= -this.scoreToWin) {
       // Stop animations.
       this.robot?.rotateKey(false);
@@ -117,8 +120,8 @@ export default class MainScene extends Phaser.Scene {
       // }.bind(this));
       // message.show();
     } else {
-      // // Enable choosing panel.
-      // this.choosePanel.enable();
+      // Enable choosing panel.
+      this.choosePanel?.enable();
     }
   }
 }
