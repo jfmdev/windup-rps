@@ -1,13 +1,13 @@
 import { TextButton } from '../util/buttons.js';
 import { ChoosePanel } from '../util/choose_panel.js';
+import { Mannequin, Robot } from '../util/figures.js';
 import { GameAI, RandomThrow, ThrowAlgorithm } from '../util/game_ai.js';
 // import { HistoryPanel } from '../util/history_panel.js';
-import { getScore, matchResult, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
-import { Mannequin, Robot } from '../util/figures.js';
+import { MatchEndMessage } from '../util/math_end_msg.js';
+import { getScore, matchResult, Result, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
 import { ResultPanel } from '../util/result_panel.js';
 
 export default class MainScene extends Phaser.Scene {
-  private levelLabel: Phaser.GameObjects.Text | null = null;
   private scoreLabel: Phaser.GameObjects.Text | null = null;
 
   private mannequin: Mannequin | null = null;
@@ -30,9 +30,9 @@ export default class MainScene extends Phaser.Scene {
     // Do nothing, all assets are loaded by preload scene.
   }
 
-  init(level: number) {
+  init(params: any) {
     // Initialize level (-1 for a quickmatch).
-    this.level = level ? level : -1;
+    this.level = params?.level ? params.level : -1;
 
     // Define the score need for win.
     this.scoreToWin = 5;
@@ -62,7 +62,7 @@ export default class MainScene extends Phaser.Scene {
 
     // Add level label.
     const levelText = this.level > 0 ? ("Level: " + this.level) : "Quickmatch";
-    this.levelLabel = this.add.text(20, 20, levelText, Styles.levelLabel);
+    this.add.text(20, 20, levelText, Styles.levelLabel);
 
     // Add back button.
     TextButton.backButton(this, "Return");
@@ -113,16 +113,16 @@ export default class MainScene extends Phaser.Scene {
       // Update max level reached.
       updateMaxLevel(nextLevel);
 
-      // // Display match result.
-      // var message = new MatchEndMessage(game, {x: 270, y: 150}, score > 0, function() { 
-      //   // If the user cleared all levels, then return to menu.
-      //   if(nextLevel > 15) {
-      //     this.game.state.start('levels');
-      //   } else {
-      //     this.game.state.start('game', true, false, nextLevel);
-      //   }
-      // }.bind(this));
-      // message.show();
+      // Display match result.
+      const message = new MatchEndMessage(this, this.game.canvas.width/2, 150, score > 0 ? Result.PLAYER_WON : Result.ROBOT_WON, () => { 
+        // If the user cleared all levels, then return to menu.
+        if(nextLevel > 15) {
+          this.scene.start('LevelsScene');
+        } else {
+          this.scene.start('GameScene', { level: nextLevel });
+        }
+      });
+      message.show();
     } else {
       // Enable choosing panel.
       this.choosePanel?.enable();

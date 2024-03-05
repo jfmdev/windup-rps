@@ -66,7 +66,7 @@ export class LevelButton {
 }
 
 export class TextButton {
-  private text: Phaser.GameObjects.Text;
+  public text: Phaser.GameObjects.Text;
 
   constructor(scene: Phaser.Scene, positionX: number, positionY: number, label: string, style: object, clickHandler: Function) {
     this.text = scene.add.text(positionX, positionY, label, style);

@@ -20,11 +20,12 @@ export default class MainScene extends Phaser.Scene {
     // Display level icons.
     let offsetY = -20;
     const maxLevel = getMaxLevel();
-    for(var i=0; i<15; i++) {
-        if(i%5 == 0) {offsetY += 120;}
-        var offsetX = 64 + (i%5)*122;
-        var disabled = (i+1) > maxLevel;
-        new LevelButton(this, offsetX, offsetY, (i+1) + "", disabled, () => this.playLevel(i+1));
+    for(let i=0; i<15; i++) {
+      if(i%5 == 0) {offsetY += 120;}
+      let offsetX = 64 + (i%5)*122;
+      let disabled = (i+1) > maxLevel;
+      const level = i+1;
+      new LevelButton(this, offsetX, offsetY, level + "", disabled, () => this.playLevel(level));
     }
 
     // Add back button.
