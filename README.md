@@ -2,6 +2,10 @@
 
 A game where you must play rock-paper-scissors against a group of evil (but no so smart) windup robots.
 
+[Play the game here](https://jfmdev.github.io/windup-rps/)
+
+![screenshot](./public/misc/screenshot-3.jpg)
+
 ## Getting Started
 
 The project was created using the [vite-phaser-ts](https://github.com/iwantantra/vite-phaser-ts) template, which provides the following scripts:
