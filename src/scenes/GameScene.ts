@@ -1,8 +1,10 @@
 import { TextButton } from '../util/buttons.js';
 import { ChoosePanel } from '../util/choose_panel.js';
 import { GameAI, RandomThrow, ThrowAlgorithm } from '../util/game_ai.js';
+// import { HistoryPanel } from '../util/history_panel.js';
 import { getScore, matchResult, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
 import { Mannequin, Robot } from '../util/figures.js';
+import { ResultPanel } from '../util/result_panel.js';
 
 export default class MainScene extends Phaser.Scene {
   private levelLabel: Phaser.GameObjects.Text | null = null;
@@ -17,6 +19,8 @@ export default class MainScene extends Phaser.Scene {
   private gameAI: ThrowAlgorithm = new RandomThrow();
 
   private choosePanel: ChoosePanel | null = null;
+  // private historyPanel: HistoryPanel | null = null;
+  private resultPanel: ResultPanel | null = null;
 
   constructor() {
     super('GameScene');
@@ -49,15 +53,15 @@ export default class MainScene extends Phaser.Scene {
     this.mannequin = new Mannequin(this);
 
     // Add choose, result and history panels.
-    this.choosePanel = new ChoosePanel(this, this.game.canvas.width/2, this.game.canvas.height/2+ 100, this.onPlayerChoosed.bind(this));
-    // this.resultPanel = new ResultPanel(game, {'x': Shared.world.centerX, 'y': 10});
+    this.choosePanel = new ChoosePanel(this, this.game.canvas.width/2, this.game.canvas.height/2 + 125, this.onPlayerChoosed.bind(this));
+    this.resultPanel = new ResultPanel(this, this.game.canvas.width/2, 10);
     // this.historyPanel = new HistoryPanel(game, {'x': Shared.world.width - 100, 'y': 20});
 
     // Add score label.
     this.scoreLabel = this.add.text(this.game.canvas.width-120, this.game.canvas.height-50, "Score:  0", Styles.boldLabel);
 
     // Add level label.
-    const levelText = this.level > 0? ("Level: " + this.level) : "Quickmatch";
+    const levelText = this.level > 0 ? ("Level: " + this.level) : "Quickmatch";
     this.levelLabel = this.add.text(20, 20, levelText, Styles.levelLabel);
 
     // Add back button.
@@ -78,7 +82,7 @@ export default class MainScene extends Phaser.Scene {
 
   displayRoundResult(playerThrow: Throw, robotThrow: Throw) {
     // Add new entry to history (limiting number of elements to 25).
-    var result = matchResult(playerThrow, robotThrow);
+    const result = matchResult(playerThrow, robotThrow);
     this.history.push({ 'player': playerThrow, 'robot': robotThrow, 'result': result});
     if(this.history.length > 25) { this.history.shift(); }
 
@@ -89,13 +93,13 @@ export default class MainScene extends Phaser.Scene {
     var score = getScore(this.history);
     this.scoreLabel?.setText('Score: ' + (score < 0? '' : ' ') + score);
 
-    // // Display result animation and (when finished) start next round.
-    // this.resultPanel.display(playerThrow, robotThrow, this.nextRound.bind(this));
+    // Display result animation and (when finished) start next round.
+    this.resultPanel?.display(playerThrow, robotThrow, this.nextRound.bind(this));
   }
 
   nextRound() {
-    // // Hide panel.
-    // this.resultPanel.hide();
+    // Hide panel.
+    this.resultPanel?.hide();
 
     // Verify if the match as ended.
     const score = getScore(this.history);

@@ -17,13 +17,14 @@ export class ChoosePanel {
         
     // Add label.
     const textChoose = scene.add.text(0, 0, "Choose a throw", Styles.commonLabel);
+    textChoose.setOrigin(0.5, 0.5);
     this.container.add(textChoose);
         
     // Create option sprites.
     this.arrayOptions = [
-      scene.add.sprite(-90, 90, 'rock'),
-      scene.add.sprite(  0, 90, 'paper'),
-      scene.add.sprite( 90, 90, 'scissors')
+      scene.add.sprite(-90, 60, 'rock'),
+      scene.add.sprite(  0, 60, 'paper'),
+      scene.add.sprite( 90, 60, 'scissors')
     ];
         
     // Initialize option sprites.
@@ -39,12 +40,12 @@ export class ChoosePanel {
         .setInteractive({ useHandCursor: true })
         .on('pointerdown', () => this.onInputDownSprite(sprite))        
             
-        // Rotate sprites.
+      // Rotate sprites.
       scene.add.tween({
         targets: sprite,
         angle: 360,
         duration: 1600,
-        repeat: true,
+        repeat: -1,
         ease: Phaser.Math.Easing.Linear,
       });      
     }

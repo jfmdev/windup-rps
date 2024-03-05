@@ -38,7 +38,7 @@ export interface Round {
 
 // Method for calculate the result of a round.
 export function matchResult(playerThrow: Throw, robotThrow: Throw) {
-  if(playerThrow != robotThrow) {
+  if(playerThrow !== robotThrow) {
     // Verify if player wins (true) or if robot wins (false).
     return (playerThrow === Throw.ROCK && robotThrow === Throw.SCISSORS) ||
            (playerThrow === Throw.PAPER && robotThrow === Throw.ROCK) ||
