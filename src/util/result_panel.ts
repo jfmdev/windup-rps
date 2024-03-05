@@ -18,6 +18,7 @@ export class ResultPanel {
         
     // Add label.
     this.title = scene.add.text(0, 0, "", Styles.subtitle);
+    this.title.setOrigin(0.5, 0);
     this.container.add(this.title);
   }
 
