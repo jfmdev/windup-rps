@@ -15,7 +15,8 @@ export default class MainScene extends Phaser.Scene {
     this.add.sprite(this.game.canvas.width/2, this.game.canvas.height/2, 'background-menu');
 
     // Add title.
-    this.add.text(this.game.canvas.width/2, 0, "Help", Styles.mainTitle);
+    const title = this.add.text(this.game.canvas.width/2, 0, "Help", Styles.mainTitle);
+    title.setOrigin(0.5, 0);
     
     // Add instructions.
     const instructions = "You must play Rock Paper Scissors against a group of evil robots." +
