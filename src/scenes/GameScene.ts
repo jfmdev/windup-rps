@@ -2,7 +2,7 @@ import { TextButton } from '../util/buttons.js';
 import { ChoosePanel } from '../util/choose_panel.js';
 import { Mannequin, Robot } from '../util/figures.js';
 import { GameAI, RandomThrow, ThrowAlgorithm } from '../util/game_ai.js';
-// import { HistoryPanel } from '../util/history_panel.js';
+import { HistoryPanel } from '../util/history_panel.js';
 import { MatchEndMessage } from '../util/math_end_msg.js';
 import { getScore, matchResult, Result, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
 import { ResultPanel } from '../util/result_panel.js';
@@ -13,13 +13,13 @@ export default class MainScene extends Phaser.Scene {
   private mannequin: Mannequin | null = null;
   private robot: Robot | null = null;
 
-  private level: number = 0;
-  private scoreToWin: number = 5;
+  private level = 0;
+  private scoreToWin = 5;
   private history: Array<Round> = [];
   private gameAI: ThrowAlgorithm = new RandomThrow();
 
   private choosePanel: ChoosePanel | null = null;
-  // private historyPanel: HistoryPanel | null = null;
+  private historyPanel: HistoryPanel | null = null;
   private resultPanel: ResultPanel | null = null;
 
   constructor() {
@@ -30,6 +30,7 @@ export default class MainScene extends Phaser.Scene {
     // Do nothing, all assets are loaded by preload scene.
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   init(params: any) {
     // Initialize level (-1 for a quickmatch).
     this.level = params?.level ? params.level : -1;
@@ -55,7 +56,7 @@ export default class MainScene extends Phaser.Scene {
     // Add choose, result and history panels.
     this.choosePanel = new ChoosePanel(this, this.game.canvas.width/2, this.game.canvas.height/2 + 125, this.onPlayerChoosed.bind(this));
     this.resultPanel = new ResultPanel(this, this.game.canvas.width/2, 10);
-    // this.historyPanel = new HistoryPanel(game, {'x': Shared.world.width - 100, 'y': 20});
+    this.historyPanel = new HistoryPanel(this, this.game.canvas.width - 100, 20);
 
     // Add score label.
     this.scoreLabel = this.add.text(this.game.canvas.width-120, this.game.canvas.height-50, "Score:  0", Styles.boldLabel);
@@ -86,11 +87,11 @@ export default class MainScene extends Phaser.Scene {
     this.history.push({ 'player': playerThrow, 'robot': robotThrow, 'result': result});
     if(this.history.length > 25) { this.history.shift(); }
 
-    // // Send new history to history panel and game AI.
-    // this.historyPanel.update(this.history);
+    // Send new history to history panel and game AI.
+    this.historyPanel?.update(this.history);
 
     // Update score label.
-    var score = getScore(this.history);
+    const score = getScore(this.history);
     this.scoreLabel?.setText('Score: ' + (score < 0? '' : ' ') + score);
 
     // Display result animation and (when finished) start next round.
@@ -108,7 +109,7 @@ export default class MainScene extends Phaser.Scene {
       this.robot?.rotateKey(false);
 
       // Calculate next level.
-      var nextLevel = (score >= this.scoreToWin && this.level > 0)? (this.level+1) : this.level;
+      const nextLevel = (score >= this.scoreToWin && this.level > 0)? (this.level+1) : this.level;
 
       // Update max level reached.
       updateMaxLevel(nextLevel);

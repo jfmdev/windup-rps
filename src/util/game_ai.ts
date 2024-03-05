@@ -110,7 +110,7 @@ export class MixedThrow extends ThrowAlgorithm {
   private duration: number;
   private iteration: number;
   
-  constructor(algorithms: Array<ThrowAlgorithm>, duration: number = 0) {
+  constructor(algorithms: Array<ThrowAlgorithm>, duration = 0) {
     super();
     this.algorithms = algorithms;
     this.duration = duration > 0? duration : 3;
@@ -231,7 +231,7 @@ export class GameAI {
     
     return res;
   }
-};
+}
 
 // // Testing.
 // for(var i=1; i<=15; i++) {

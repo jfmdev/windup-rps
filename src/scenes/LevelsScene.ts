@@ -22,8 +22,8 @@ export default class MainScene extends Phaser.Scene {
     const maxLevel = getMaxLevel();
     for(let i=0; i<15; i++) {
       if(i%5 == 0) {offsetY += 120;}
-      let offsetX = 64 + (i%5)*122;
-      let disabled = (i+1) > maxLevel;
+      const offsetX = 64 + (i%5)*122;
+      const disabled = (i+1) > maxLevel;
       const level = i+1;
       new LevelButton(this, offsetX, offsetY, level + "", disabled, () => this.playLevel(level));
     }
