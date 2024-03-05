@@ -1,5 +1,5 @@
 import { TextButton } from './buttons.js';
-import { Result, Styles } from './misc.js';
+import { Result, Styles, VoidCallback } from './misc.js';
 
 export class MatchEndMessage {
   private scene: Phaser.Scene;
@@ -10,7 +10,7 @@ export class MatchEndMessage {
   private message: Phaser.GameObjects.Text;
   private next: TextButton;
 
-  constructor(scene: Phaser.Scene, positionX: number, positionY: number, result: Result, callback: Function) {
+  constructor(scene: Phaser.Scene, positionX: number, positionY: number, result: Result, callback: VoidCallback) {
     this.scene = scene;
   
     // Define group.

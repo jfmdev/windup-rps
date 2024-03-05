@@ -3,7 +3,7 @@ import { ChoosePanel } from '../util/choose_panel.js';
 import { Mannequin, Robot } from '../util/figures.js';
 import { GameAI, RandomThrow, ThrowAlgorithm } from '../util/game_ai.js';
 import { HistoryPanel } from '../util/history_panel.js';
-import { MatchEndMessage } from '../util/math_end_msg.js';
+import { MatchEndMessage } from '../util/match_end_msg.js';
 import { getScore, matchResult, Result, Round, Styles, Throw, updateMaxLevel } from '../util/misc.js';
 import { ResultPanel } from '../util/result_panel.js';
 

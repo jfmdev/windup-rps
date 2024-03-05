@@ -1,13 +1,13 @@
-import { Styles, Throw } from './misc.js';
+import { Styles, Throw, ThrowCallback } from './misc.js';
 
 export class ChoosePanel {
   private scene: Phaser.Scene;
 
-  private callback: Function;
+  private callback: ThrowCallback;
   private container: Phaser.GameObjects.Container;
   private arrayOptions: Phaser.GameObjects.Sprite[];
 
-  constructor(scene: Phaser.Scene, positionX: number, positionY: number, callback: Function) {
+  constructor(scene: Phaser.Scene, positionX: number, positionY: number, callback: ThrowCallback) {
     this.scene = scene;
     this.callback = callback;
     

@@ -1,4 +1,4 @@
-// --- Constants and Enumerations --- //
+// --- Constants, Enumerations and Types --- //
 
 export const GAME_WIDTH = 640;
 export const GAME_HEIGHT = 480;
@@ -33,6 +33,9 @@ export interface Round {
   robot: Throw;
   result: Result;
 }
+
+export type ThrowCallback = (value: Throw) => void;
+export type VoidCallback = () => void;
 
 // --- Functions --- //
 

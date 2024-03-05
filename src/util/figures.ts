@@ -1,4 +1,4 @@
-import { Throw } from '../util/misc.js';
+import { Throw, VoidCallback } from '../util/misc.js';
 
 // FIXME: A base class should be defined to avoid copy/pasted code between Mannequin and Robot. 
 
@@ -32,7 +32,7 @@ export class Mannequin {
     return this.arm.angle > -60;
   }
 
-  animateArm(count: number, result: Throw, callback: Function | null = null) {
+  animateArm(count: number, result: Throw, callback: VoidCallback | null = null) {
     // Reset arm frame.
     this.arm.setFrame(0);
 
@@ -120,7 +120,7 @@ export class Robot {
     return this.arm.angle < 60;
   }
 
-  animateArm(count: number, result: Throw, callback: Function | null = null) {
+  animateArm(count: number, result: Throw, callback: VoidCallback | null = null) {
     // Reset arm frame.
     this.arm.setFrame(0);
 

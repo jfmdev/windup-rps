@@ -1,4 +1,4 @@
-import { matchResult, Result, Styles, Throw, throwToString } from './misc.js';
+import { matchResult, Result, Styles, Throw, throwToString, VoidCallback } from './misc.js';
 
 export class ResultPanel {
   private scene: Phaser.Scene;
@@ -35,7 +35,7 @@ export class ResultPanel {
     });
   }
 
-  display(playerThrow: Throw, robotThrow: Throw, callback: Function) {
+  display(playerThrow: Throw, robotThrow: Throw, callback: VoidCallback) {
     // Calculate winner.
     const result = matchResult(playerThrow, robotThrow);
     
@@ -63,7 +63,7 @@ export class ResultPanel {
     this.animateIcons(result, throwToString(playerThrow).toLowerCase(), throwToString(robotThrow).toLowerCase(), callback)
   }
 
-  animateIcons(result: Result, playerIcon: string, robotIcon: string, callback: Function) {
+  animateIcons(result: Result, playerIcon: string, robotIcon: string, callback: VoidCallback) {
     // Add player and robot icons.
     this.playerSprite = this.scene.add.sprite(-150, 80, playerIcon);
     this.playerSprite.setOrigin(0.5, 0.5);

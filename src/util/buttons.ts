@@ -1,14 +1,16 @@
-import { changeCursor, Styles } from './misc.js';
+import { changeCursor, Styles, VoidCallback } from './misc.js';
+
+export type LevelButtonCallback = (value: LevelButton) => void;
 
 export class LevelButton {
   private disabled: boolean;
-  private clickHandler: Function;
+  private clickHandler: LevelButtonCallback;
   
   private back: Phaser.GameObjects.Sprite;
   private group: Phaser.GameObjects.Group;
   private label: Phaser.GameObjects.Text;
 
-  constructor(game: Phaser.Scene, positionX: number, positionY: number, text: string, disabled: boolean, clickHandler: Function) {
+  constructor(game: Phaser.Scene, positionX: number, positionY: number, text: string, disabled: boolean, clickHandler: LevelButtonCallback) {
     this.disabled = disabled;
     this.clickHandler = clickHandler;
 
@@ -59,7 +61,7 @@ export class LevelButton {
   }
 
   onInputDown() {
-    if(!this.disabled && this.clickHandler) {
+    if(!this.disabled) {
       this.clickHandler(this);
     }
   }
@@ -68,7 +70,7 @@ export class LevelButton {
 export class TextButton {
   public text: Phaser.GameObjects.Text;
 
-  constructor(scene: Phaser.Scene, positionX: number, positionY: number, label: string, style: object, clickHandler: Function) {
+  constructor(scene: Phaser.Scene, positionX: number, positionY: number, label: string, style: object, clickHandler: VoidCallback) {
     this.text = scene.add.text(positionX, positionY, label, style);
 
     this.text.setInteractive(
